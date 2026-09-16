@@ -173,26 +173,48 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
 }
 .nav-toggle span{ width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
 
-/* ===== HERO : 1画面完結 ===== */
+/* ===== HERO : 1画面完結（背景画像＋左側コピー） ===== */
 .hero{
   position: relative;
   min-height: 100svh;
-  background: var(--lime);
+  background: #accc0f;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
   padding-top: clamp(80px, 11vh, 104px);
 }
+.hero-media{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 30%;
+}
+/* 縦長の画面ではイラストが左へ寄るため、同色グラデーションでコピー側を保護する */
+.hero-media::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    #accc0f 0%,
+    rgba(172,204,15,0.96) 24%,
+    rgba(172,204,15,0.55) 42%,
+    rgba(172,204,15,0) 58%);
+}
 .hero-copy{
   position: relative;
   z-index: 3;
   width: 100%;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: 28px;
+  max-width: 560px;
+  flex: 0 0 auto;
+  padding-left: clamp(22px, 5.5vw, 96px);
+  padding-right: 22px;
+  padding-bottom: 20px;
 }
 .hero-eyebrow{
   display: inline-block;
@@ -207,77 +229,58 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
 .hero-title{
   color: var(--white);
   /* 幅と高さの両方に連動させ、低い画面でも1画面に収める */
-  font-size: clamp(1.9rem, min(5.4vw, 8.2vh), 4rem);
-  line-height: 1.24;
+  font-size: clamp(1.65rem, min(3.6vw, 5.6vh), 2.7rem);
+  line-height: 1.38;
   text-shadow: 0 3px 0 rgba(0,0,0,0.05);
 }
-.hero-line{ display: block; }
-.hero-title .dot{ opacity: 0.7; }
 .hero-emph{
   display: inline-block;
-  margin-top: 14px;
   background: var(--white);
   color: var(--green-deep);
-  padding: 6px 26px 10px;
+  padding: 2px 18px 5px;
   border-radius: 999px;
+  margin: 4px 0;
 }
-.hero-emph .bang{ color: var(--rust); }
 .hero-lead{
-  margin-top: clamp(16px, 2.8vh, 28px);
-  font-size: 1.04rem;
+  margin-top: clamp(14px, 2.4vh, 24px);
+  font-size: 0.98rem;
   color: rgba(255,255,255,0.95);
   font-weight: 500;
-  max-width: 50ch;
 }
-.hero-actions{
-  margin-top: clamp(20px, 3.6vh, 36px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.hero-badge{
-  position: absolute;
-  z-index: 4;
-  right: clamp(24px, 6vw, 96px);
-  top: clamp(110px, 18vh, 200px);
-  width: clamp(150px, 17vw, 220px);
-  aspect-ratio: 1;
-  border-radius: 50%;
+.hero-point{
+  display: inline-block;
+  margin-top: clamp(14px, 2.4vh, 22px);
   background: var(--yellow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transform: rotate(7deg);
-  padding: 12px;
-  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 7px 20px;
+  border-radius: 999px;
 }
-.badge-pre, .badge-post{ font-size: 0.76rem; font-weight: 700; color: var(--ink); }
-.badge-mid{ font-size: 0.86rem; font-weight: 700; color: var(--ink); }
-.badge-mid em{ font-style: normal; font-family: var(--round); font-weight: 800; font-size: 1.5em; color: var(--rust); }
-.badge-main{
+.hero-point em{
+  font-style: normal;
   font-family: var(--round);
   font-weight: 800;
-  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  font-size: 1.3em;
   color: var(--rust);
-  line-height: 1.2;
 }
-
-/* マスコット帯。画像の背景色が --lime と同一のため contain でも境目が出ない */
-.hero-art{
-  position: relative;
-  z-index: 1;
-  flex: 0 0 auto;
-  height: clamp(140px, 24vh, 400px);
-  pointer-events: none;
+.hero-point strong{
+  font-family: var(--round);
+  font-weight: 800;
+  font-size: 1.15em;
+  color: var(--rust);
 }
-.hero-art img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
+.hero-actions{
+  margin-top: clamp(18px, 3.2vh, 32px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+.hero-tel{
+  margin-top: 14px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
 }
 
 /* ===== 01 お悩み : 全画面ビジュアル ===== */
@@ -654,32 +657,66 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   .fab-call{ display: flex; }
 }
 
+/* タブレット幅：横型画像だとイラストが左へ寄りすぎるため、コピーの下に帯で敷く */
+@media (min-width: 681px) and (max-width: 1040px){
+  .hero{
+    justify-content: flex-start;
+    padding-top: 88px;
+    padding-bottom: 78px;
+  }
+  /* イラストの表示領域を確保するため、リード文と訴求バッジは省略
+     （同じ内容は直後のステートメント帯とサービス欄に掲載） */
+  .hero-lead, .hero-point{ display: none; }
+  /* イラストを切らずに元の比率のまま表示する */
+  .hero-media{
+    position: static;
+    order: 2;
+    margin-top: auto;
+    height: auto;
+  }
+  .hero-media::after{ display: none; }
+  .hero-media img{ width: 100%; height: auto; }
+  .hero-copy{
+    order: 1;
+    max-width: none;
+    padding-left: clamp(24px, 5vw, 60px);
+  }
+}
+
 @media (max-width: 680px){
   .wrap{ padding-left: 22px; padding-right: 22px; }
   .br-pc{ display: none; }
   .br-sp{ display: inline; }
 
-  .hero{ padding-top: 80px; }
-  .hero-eyebrow{ font-size: 0.74rem; padding: 5px 15px; margin-bottom: 16px; }
-  .hero-title{ font-size: 1.78rem; line-height: 1.32; }
-  .hero-emph{ margin-top: 10px; padding: 4px 18px 8px; }
-  .hero-lead{ margin-top: 16px; font-size: 0.92rem; }
-  .hero-actions{ margin-top: 22px; gap: 10px; }
-  .hero-actions .btn{ width: 100%; padding: 14px 20px; font-size: 0.94rem; }
-  /* 下部72pxは固定電話ボタンが重なるため、イラストは帯の上寄せにする */
-  .hero-art{ height: 200px; }
-  .hero-art img{ object-position: center top; }
-  .hero-badge{
-    top: auto;
-    bottom: 128px;
-    right: 12px;
-    width: 118px;
-    padding: 8px;
-    transform: rotate(6deg);
+  /* スマホは縦型画像を全面に敷き、上下の余白にコピーを置く */
+  .hero{
+    display: block;
+    padding-top: 0;
+    padding-bottom: 0;
   }
-  .badge-pre, .badge-post{ font-size: 0.6rem; }
-  .badge-mid{ font-size: 0.64rem; }
-  .badge-main{ font-size: 0.94rem; }
+  .hero-media::after{ display: none; }
+  .hero-media img{ object-position: center center; }
+  .hero-copy{
+    position: relative;
+    z-index: 3;
+    min-height: 100svh;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 74px 22px 86px;
+  }
+  /* イラストに重なるため、リード文と訴求バッジはスマホでは非表示
+     （同じ内容は直後のステートメント帯とサービス欄に掲載） */
+  .hero-lead, .hero-point{ display: none; }
+  .hero-eyebrow{ font-size: 0.7rem; padding: 4px 13px; margin-bottom: 9px; }
+  .hero-title br{ display: none; }
+  .hero-title-tail{ display: inline-block; }
+  .hero-title{ font-size: 1.16rem; line-height: 1.55; }
+  .hero-emph{ padding: 1px 12px 4px; margin: 0 2px; }
+  .hero-actions{ margin-top: 0; gap: 8px; flex-wrap: nowrap; }
+  .hero-actions .btn{ flex: 1 1 0; padding: 12px 8px; font-size: 0.82rem; gap: 6px; }
+  .hero-tel{ margin-top: 9px; font-size: 0.72rem; }
 
   .flow-list{ grid-template-columns: 1fr; }
   .company-table th{ width: 94px; font-size: 0.74rem; }
