@@ -38,6 +38,5 @@ contactForm.addEventListener("submit", (e) => {
   ];
   const subject = encodeURIComponent("【HPより】お問い合わせ");
   const body = encodeURIComponent(lines.join("\n"));
-  // TODO: replace with the business's real inbox address
-  window.location.href = `mailto:REPLACE-WITH-YOUR-EMAIL@example.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:info@misolution.biz?subject=${subject}&body=${body}`;
 });
