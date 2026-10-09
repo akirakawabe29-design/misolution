@@ -152,15 +152,15 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
 .brand-name{ font-family: Georgia, serif; font-size: 1.24rem; }
 .brand-sub{ font-size: 0.66rem; opacity: 0.8; letter-spacing: 0.04em; }
 
-.site-nav ul{ display: flex; gap: 26px; }
-.site-nav a{ font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: baseline; gap: 6px; }
+.site-nav ul{ display: flex; gap: 22px; }
+.site-nav a{ font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
 .nav-idx{ font-size: 0.6rem; opacity: 0.7; font-weight: 700; }
 .site-nav a:hover{ opacity: 0.72; }
 
 .header-cta{ display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
-.tel-link{ display: flex; flex-direction: column; text-align: right; }
-.tel-link strong{ font-size: 1.06rem; line-height: 1.2; }
-.tel-link small{ font-size: 0.64rem; opacity: 0.8; }
+.header-tel{ display: flex; flex-direction: column; text-align: right; }
+.header-tel strong{ font-size: 1rem; line-height: 1.2; font-weight: 700; }
+.header-tel small{ font-size: 0.64rem; opacity: 0.8; }
 
 .nav-toggle{
   display: none;
@@ -516,6 +516,12 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   letter-spacing: 0.04em;
 }
 .company-table td a{ font-weight: 700; border-bottom: 1px solid var(--line); }
+.table-note{
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
 .map-frame{ border: 1px solid var(--line); line-height: 0; }
 .map-frame iframe{ width: 100%; height: 430px; border: 0; display: block; }
 
@@ -531,14 +537,40 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   gap: clamp(40px, 5vw, 76px);
   align-items: start;
 }
-.contact-lead{ color: rgba(255,255,255,0.86); margin-bottom: 40px; }
-.contact-tel{ display: flex; flex-direction: column; gap: 4px; }
-.contact-tel small{ font-size: 0.8rem; color: rgba(255,255,255,0.72); }
-.contact-tel strong{ font-family: var(--round); font-weight: 800; font-size: clamp(1.9rem, 3.4vw, 2.5rem); }
-.contact-hours{ margin-top: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+/* 電話対応が難しい旨のお願い。フォームの直前に全幅で置く */
+.contact-notice{
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--line-light);
+  border-left: 4px solid var(--yellow);
+  padding: 24px 28px;
+  margin: -16px 0 46px;
+}
+.contact-notice-title{
+  font-family: var(--round);
+  font-weight: 800;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+.contact-notice p{ font-size: 0.92rem; color: rgba(255,255,255,0.9); }
+
+.contact-info{ margin: 0 0 28px; }
+.contact-info > div{
+  display: flex;
+  gap: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+.contact-info dt{
+  width: 5.5em;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+}
+.contact-info dd{ margin: 0; font-weight: 700; }
 .contact-fb{
   display: inline-block;
-  margin-top: 32px;
   font-weight: 700;
   border-bottom: 1px solid var(--line-light);
   padding-bottom: 4px;
@@ -575,6 +607,12 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   outline: none;
   border-color: var(--yellow);
 }
+.form-help{
+  display: block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.6);
+}
 .contact .btn-primary{
   background: var(--yellow);
   border-color: var(--yellow);
@@ -604,7 +642,7 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
 .footer-copy{ width: 100%; margin-top: 28px; font-size: 0.74rem; opacity: 0.45; }
 
 /* ===== 固定電話ボタン（モバイル） ===== */
-.fab-call{
+.fab-contact{
   display: none;
   position: fixed;
   left: 16px; right: 16px; bottom: 16px;
@@ -619,7 +657,7 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   font-weight: 800;
   box-shadow: 0 10px 24px rgba(0,0,0,0.22);
 }
-.fab-call svg{ width: 1.2em; height: 1.2em; }
+.fab-contact svg{ width: 1.2em; height: 1.2em; }
 
 /* ===== レスポンシブ ===== */
 @media (max-width: 1040px){
@@ -654,7 +692,7 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   .company-grid{ grid-template-columns: 1fr; }
   .contact-grid{ grid-template-columns: 1fr; }
 
-  .fab-call{ display: flex; }
+  .fab-contact{ display: flex; }
 }
 
 /* タブレット幅：横型画像だとイラストが左へ寄りすぎるため、コピーの下に帯で敷く */
@@ -715,11 +753,12 @@ button{ font: inherit; background: none; border: none; cursor: pointer; }
   .hero-title{ font-size: 1.16rem; line-height: 1.55; }
   .hero-emph{ padding: 1px 12px 4px; margin: 0 2px; }
   .hero-actions{ margin-top: 0; gap: 8px; flex-wrap: nowrap; }
-  .hero-actions .btn{ flex: 1 1 0; padding: 12px 8px; font-size: 0.82rem; gap: 6px; }
+  .hero-actions .btn{ flex: 1 1 0; padding: 12px 6px; font-size: 0.8rem; gap: 0; white-space: nowrap; }
+  .hero-actions .btn svg{ display: none; }
   .hero-tel{ margin-top: 9px; font-size: 0.72rem; }
 
   .flow-list{ grid-template-columns: 1fr; }
   .company-table th{ width: 94px; font-size: 0.74rem; }
-  .header-cta .tel-link{ display: none; }
+  .header-cta .header-tel{ display: none; }
   .footer-inner{ flex-direction: column; align-items: flex-start; }
 }

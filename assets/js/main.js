@@ -27,9 +27,10 @@ contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(contactForm);
   const lines = [
-    `お名前: ${data.get("name")}`,
-    `会社名・店舗名: ${data.get("company") || "-"}`,
-    `電話番号: ${data.get("tel")}`,
+    `会社名・店舗名: ${data.get("company")}`,
+    `担当者名: ${data.get("name")}`,
+    `住所: ${data.get("address") || "-"}`,
+    `電話番号: ${data.get("tel") || "-"}`,
     `メールアドレス: ${data.get("email")}`,
     "",
     "お問い合わせ内容:",
