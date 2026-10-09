@@ -351,7 +351,8 @@
         <a class="contact-fb" href="https://www.facebook.com/misolution.biz/" target="_blank" rel="noopener">Facebookページを見る　→</a>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <!-- 送信先サービスが決まったら action / method を設定し、main.js の送信ハンドラを削除する -->
+      <form class="contact-form" id="contactForm" action="" method="post">
         <div class="form-row">
           <label for="f-company">会社名・店舗名<span class="req">必須</span></label>
           <input type="text" id="f-company" name="company" required>
@@ -379,9 +380,14 @@
           <textarea id="f-message" name="message" rows="4" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block">この内容で送信する</button>
+
+        <p class="form-status" id="formStatus" role="status" tabindex="-1" hidden>
+          申し訳ございません。ただいまフォームからの送信を準備中です。<br>
+          お手数ですが、ご用件を <strong>info@misolution.biz</strong> までメールでお送りください。
+        </p>
+
         <p class="form-note">
-          送信ボタンを押すと、入力内容を記載したメールがお使いのメールソフトで開きます。<br>
-          起動しない場合は、お手数ですが info@misolution.biz 宛にご送信ください。
+          ※ お問い合わせフォームは現在準備中です。恐れ入りますが、ご用件は info@misolution.biz までメールでお送りください。
         </p>
       </form>
       </div>

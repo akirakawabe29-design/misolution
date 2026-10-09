@@ -22,21 +22,13 @@ siteNav.querySelectorAll("a").forEach((link) => {
   });
 });
 
+// 送信先サービス未接続のため、送信は行わず現状を案内する。
+// 接続後はこのハンドラを削除し、form 要素の action / method を設定する。
 const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const data = new FormData(contactForm);
-  const lines = [
-    `会社名・店舗名: ${data.get("company")}`,
-    `担当者名: ${data.get("name")}`,
-    `住所: ${data.get("address") || "-"}`,
-    `電話番号: ${data.get("tel") || "-"}`,
-    `メールアドレス: ${data.get("email")}`,
-    "",
-    "お問い合わせ内容:",
-    data.get("message"),
-  ];
-  const subject = encodeURIComponent("【HPより】お問い合わせ");
-  const body = encodeURIComponent(lines.join("\n"));
-  window.location.href = `mailto:info@misolution.biz?subject=${subject}&body=${body}`;
+  formStatus.hidden = false;
+  formStatus.focus();
 });
